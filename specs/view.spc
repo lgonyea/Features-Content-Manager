@@ -1,0 +1,10 @@
+name|view
+status|live
+colnum|3
+dueday|Wednesday
+duetime|1630
+dueweek|5
+emailgroup|lrgonyea
+recycle|No
+xmlFeature|No
+copy|

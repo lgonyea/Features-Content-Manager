@@ -1,0 +1,12 @@
+Notes|ckeditor||Genre and Cast should be bold
+Name|static|<99><4><1>|
+EP
+Movie1|text|<1>
+EP
+MovieDesc1|ckeditor|<2>|Description for Movie 1<br><strong>Genre:</strong><br><strong>Cast:</strong>
+EP
+Movie2|text|<1>
+EP
+MovieDesc2|ckeditor|<2>|Description for Movie 1<br><strong>Genre:</strong><br><strong>Cast:</strong>
+EP
+EOF

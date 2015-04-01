@@ -1,0 +1,10 @@
+name|munceleb
+status|live
+colnum|2
+dueday|Wednesday
+duetime|1130
+dueweek|3
+emailgroup|lrgonyea
+recycle|Yes
+xmlFeature|No
+copy|

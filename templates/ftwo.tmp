@@ -1,0 +1,14 @@
+Notes|ckeditor|Minimum 200 words
+Photo|ckeditor|
+Name|static|<30><4><1>
+EP||
+Headline|text|<3>
+EP||
+Byline|shorttext|<4>|By
+Copyright|shorttext|<2><9>|Zap2it
+EP||
+Body|ckeditor|
+EP||
+Caption1|text|<1>
+EP||
+EOF

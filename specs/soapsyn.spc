@@ -1,0 +1,10 @@
+name|soapsyn
+status|live
+colnum|2
+dueday|Thursday
+duetime|1130
+dueweek|2
+emailgroup|lrgonyea,gdickie
+recycle|No
+xmlFeature|No
+copy|selspsyn

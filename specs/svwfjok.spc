@@ -1,0 +1,10 @@
+name|svwfjok
+status|live
+colnum|2
+dueday|Monday
+duetime|1630
+dueweek|2
+emailgroup|lrgonyea,gdickie
+recycle|No
+xmlFeature|Yes
+copy|

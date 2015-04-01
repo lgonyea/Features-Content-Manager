@@ -1,0 +1,17 @@
+Notes|ckeditor||EDITING TIPS TO KEEP IN MIND: •Writer - Please stay away from cable channel references (exception: A&E, TLC) when compiling Trivia Quiz. Canada customers receive this as well and often donʼt get the same cable channels. • NO PERIODS necessary after the answers. Please make sure the colons are after “Questions” and “Answers”.
+Photo|ckeditor|
+Name|static|<99><4>
+EP||
+Story|static|<1><3>|Trivia Quiz
+EP||
+Headline|text|
+EP||
+Byline|text|<4>|By
+Copy|text|<2><9>|Zap2it
+EP||
+Questions|ckeditor|<1>|Questions:
+Answers|ckeditor|<2>|Answers:
+EP||
+Caption|text|<1><3>
+EP||
+EOF

@@ -1,0 +1,10 @@
+name|svspquiz
+status|live
+colnum|1
+dueday|Wednesday
+duetime|1630
+dueweek|2
+emailgroup|lrgonyea,gdickie
+recycle|No
+xmlFeature|No
+copy|

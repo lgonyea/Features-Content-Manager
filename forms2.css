@@ -1,0 +1,118 @@
+.formBox {
+border: 2px black groove;
+padding: 5px;
+background: snow;
+background: lightblue;
+
+margin: 5px;
+text-align: left;			
+box-shadow: 2px 2px 5px 4px rgba(0, 0, 0, 0.76);
+	-moz-box-shadow: 2px 2px 5px 4px rgba(0, 0, 0, 0.76);
+	-webkit-box-shadow: 2px 2px 5px 4px rgba(0, 0, 0, 0.76);		
+	width: 80%;
+
+}
+.formTitle {
+background: snow;
+padding: 2px;
+border: 4px groove black;
+margin-bottom: 15px;
+text-align:center;
+font-size:1.5em;
+/*box-shadow: 2px 2px 5px 4px rgba(0, 0, 0, 0.76);
+-moz-box-shadow: 2px 2px 5px 4px rgba(0, 0, 0, 0.76);
+-webkit-box-shadow: 2px 2px 5px 4px rgba(0, 0, 0, 0.76);		
+*/
+}
+
+fieldset {
+background: lightgray;
+border:0;
+margin-top: 15px;
+font-size: 1.2em;
+border: 1px black solid;
+padding: 5px;
+background: snow;
+}
+
+textarea {
+    padding: 5px;
+    background: white;
+    margin: 5px 0 5px 0;
+	vertical-align:middle;
+	border-radius: 3px;
+}
+
+textarea:focus { 
+background-color:yellow;
+}
+text {
+width:auto;
+}
+label {
+float:left;
+width: 100%;
+font-size:1.1em;
+font-weight: bold;
+}
+input[type=text] {
+    padding: 5px;
+    background: white;
+    margin: 5px 0 5px 0;
+	border-radius: 3px;
+	width:75%;
+}
+
+input[type=radio] {
+    padding: 5px;
+    background: white;
+    margin-left: 10px;
+}
+
+
+input:focus { 
+background-color:yellow;
+}
+select {
+width:auto;
+padding-top: 5px;
+}
+.specVal {
+width:auto;
+}
+
+.formLine {
+margin:10px;
+text-align:left;
+width:50%;
+font-weight:bold;	
+float:left;
+}
+
+.formInfo {
+margin:20px;
+text-align:left;
+width:50%;
+float:left;
+}
+
+.fieldHint {
+font-style:italic;
+font-weight: normal;
+font-size:small;
+width:100%;
+float:left;
+}
+submit {
+text-align:center;
+}
+
+.formSub {
+position:relative;
+text-align:right;
+}
+
+form {
+position: relative;
+width:100%;
+}

@@ -1,0 +1,43 @@
+body { 
+  color : #000000; 
+  background : #ffffff; 
+  font-family : "Times New Roman", Times, serif;
+  font-size : 12pt; 
+}
+a { 
+  text-decoration : none; 
+  color : #0000ff; 
+}
+#NAV, #Header, #Sidebar { 
+  display:none; 
+}
+#Container,  {
+display:block;
+}
+
+.ContentBoxfail, .ContentBoxgood, .ContentBoxto 
+			{
+			border-bottom:1px black dotted;
+			} 
+			
+			.ContentBoxFull, .ContentBoxTitle, .SidebarHeader {
+			border:1px black double;
+			padding:10px;
+			font-size:small;
+			}
+
+			.Content1of6Col {
+			display:inline;
+			}
+			.Content2of6Col {
+			display:inline;
+			}
+
+#Footer {
+			border:1px black solid;
+
+}
+.FooterRowHide {
+	border:1px black solid;
+	display:show;
+	}

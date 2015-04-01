@@ -1,0 +1,16 @@
+Notes|ckeditor|Titles section needs to have returns between each title.
+Photo|ckeditor|
+Name|static|<99><4>
+EP||
+Story|static|<1><3>|Filmography
+EP||
+Headline|text|
+EP||
+Byline|text|<4>|By
+Copyright|text|<2><9>|Zap2it
+EP||
+Films|ckeditor|<4>|
+EP||
+Titles|ckeditor|<1><3>|
+EP||
+EOF

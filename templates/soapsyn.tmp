@@ -1,0 +1,17 @@
+Notes|ckeditor|
+Name|static|<25><4>
+EP||
+Story|static|<1>|Soap Synopses
+EP||
+ReleaseDate|text||For release: mm/dd/yy
+EP||
+Byline|shorttext||By George Dickie
+Copyright|shorttext|<9>|Zap2it
+EP||
+PrintOnly|text||(This column is for print use ONLY.)
+ColumnWeek|text||(This column represents on air summaries for the week of Mon. dd-dd, YYYY.)
+Hidden|Hidden|<2>|
+EP||
+Body|ckeditor||
+EP||
+EOF30

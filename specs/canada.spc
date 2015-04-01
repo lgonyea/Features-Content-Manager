@@ -1,0 +1,10 @@
+name|canada
+status|live
+colnum|1
+dueday|Sunday
+duetime|1130
+dueweek|1
+emailgroup|lrgonyea,mlwilson,gdickie
+recycle|No
+xmlFeature|No
+copy|torcanda
