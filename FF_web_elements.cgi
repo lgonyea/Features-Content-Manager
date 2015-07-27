@@ -71,6 +71,35 @@ print "<link href=\"/print.css\" rel=\"stylesheet\" media=\"print\">\n";
 #print "<link href=\"/feat_editor_style.css\" rel=\"stylesheet\" media=\"screen\">\n";
 #print "<link href=\"/print.css\" rel=\"stylesheet\" media=\"print\">\n";
 #}
+## Loads the Javascript required to have ckeditor fields.
+
+sub LoadJS {
+print "<script src=\"../../ckeditor/ckeditor.js\">\n";
+print "</script>\n";
+print "<script type=\"text/javascript\" src=\"../../jquery/jquery-2.0.3.min.js\">\n";
+print "</script>\n";
+
+#print "<script type=\"text/javascript\">";
+#print " document.getElementsByTagName(\"eventsource\")[0].";
+#print "            addEventListener(\"server-time\", eventHandler, false);";
+#print "   function eventHandler(event)";
+#print "   {";
+#print "       // Alert time sent by the server";
+#print "       document.querySelector('#ticker').innerHTML = event.data;";
+#print "   }";
+#print "</script>";
+
+print "<style>\n";
+print "		.cke_focused,\n";
+print "		.cke_editable.cke_focused\n";
+print "		{\n";
+print "			outline: 3px dotted blue !important;\n";
+print "			*border: 3px dotted blue !important;	/* For IE7 */\n";
+print "		} \n";
+print "	\n";
+print "	</style>\n";
+print "</head>\n";
+}
 
 sub JQfadeIn {
 my $fadeDIV = $_[0];

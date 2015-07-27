@@ -188,7 +188,101 @@ ClosedDIV("class","clearFloat","");
 	ClosedDIV("class","ContentEditFull","$featPreview");
 	$NotesOnTheSide = findNotes($featureFile);
 	$PhotoOnTheSide = findPhoto($featureFile);
-	
+
+} elsif ($viewStyle eq "recycle") {
+# story=spoquiz
+# fileLoc=features10192014.xml
+# status=recycle
+# pageType=recycle
+# Mode=recycle
+#my $thisfile = $query->param('fileLoc');
+#my $statParam = $query->param('status');
+#my $thisstory = $query->param('story');
+#my $viewStyle = $query->param('viewtype');
+##my $thistmp = "${storyname}.tmp";
+#my $specFile = "${specDir}${storyname}.spc";
+	#my $templatefile = "${templateDir}${storyname}.tmp";
+
+
+ClosedDIV("class","ContentInfo","<center><h1><b>Currently editing $thisstory </b></h1></center>");
+ClosedDIV("class","clearFloat","");
+	my $featureFile = "$FeatFolder/$featdate/In Progress/$thisstory";
+	my $templateFile = "$baseFEfolder/templates/$thistmp";
+		my $openXML = "$thisfile";
+	$statParam = "new";
+	#print "<form method=\"post\" id=\"Mover\" action=\"http://$homeIP/cgi-bin/FE2/FF_mover.cgi\">\n";
+#	print "<form method=\"post\" id=\"Mover\" action=\"http://$homeIP/cgi-bin/FE2/FF_mover.cgi\" accept-charset=\"utf-8\">\n";
+	print "<form method=\"post\" id=\"Mover\" action=\"http://$homeIP/cgi-bin/FE2/FF_mover.cgi\" accept-charset=\"utf-8\">\n";
+	print "<input type=\"hidden\" name=\"fileLoc\" value=\"$featureFile\">";
+	print "<input type=\"hidden\" name=\"tmp\" value=\"$templatefile\">";
+	#print "<input type=\"hidden\" name=\"backlink\" value=\"$prevFilter\">";
+
+		#ClosedDIV("class","ContentInfo","Doing this xml $xmlDir$fileToDo<br> Looking for this feature $xmlFeat<br>");
+				open FH, "<", $openXML; #Get 
+				my @records = <FH>;
+				my $allrecords = join "", @records;	
+				my $fieldCheck = $allrecords;
+				close FH;
+				$allrecords =~  /\<$storyname\>(.*)\<\/$storyname\>/s;
+				my $thisFeat = $1;
+
+		open TH,"<:encoding(UTF-8)",$templateFile or die $!;
+		my @fieldlists = <TH>;
+		close(TH);
+		#my $wholeFeat;
+		foreach my $line (@fieldlists) {
+			my @featfield = split('\|',$line);
+ 			my $fieldName = $featfield[0];
+ 			my $fieldType = $featfield[1];
+ 			my $fieldMarkup = $featfield[2];
+ 			my $fieldOption = $featfield[4];
+ 			chomp($fieldOption);
+	#		ClosedDIV("class","ContentInfo","$thisFeat<br>");
+
+ 			$thisFeat =~ /\<$fieldName\>(.*)\<\/$fieldName\>/s; 
+			my $fieldText = $1;
+			
+			if ($fieldCheck !~ /<$fieldName>/s) {
+				my $fieldText = "";
+			}
+ 		if (($fieldName ne "EOF") && ($fieldName ne "Notes") && ($fieldName ne "Photo")) {
+ 			if (($fieldType eq "static") && ($fieldName eq "Name")) {
+ 				#$fieldText = $query->escapeHTML($fieldText);
+							$fieldText =~ s/\n/\<br\>/g;
+				OpenDIV("class","ContentForm");
+ 				ClosedDIV("class","ContentFormName","$fieldName");
+				ClosedDIV("class","ContentFormField","<input type=\"text\" rows=\"1\" cols=\"200\" name=\"$fieldName\" value=\'$thisstory\' readonly autofocus>");
+				EndDIV();
+			 } elsif ($fieldType eq "shorttext") {
+ 				utf8::encode($fieldText);
+				#$fieldText = $query->escapeHTML($fieldText);
+				OpenDIV("class","ContentForm");
+ 				ClosedDIV("class","ContentFormName","$fieldName");
+				ClosedDIV("class","ContentFormField","<textarea rows=\"1\" cols=\"110\" name=\"$fieldName\">$fieldText</textarea>");
+				EndDIV();
+			} elsif ($fieldType eq "text") {
+			 	#utf8::encode($fieldText);
+				#$fieldText = $query->escapeHTML($fieldText);
+				OpenDIV("class","ContentForm");
+ 				ClosedDIV("class","ContentFormName","$fieldName");
+				ClosedDIV("class","ContentFormField","<textarea rows=\"2\" cols=\"110\" name=\"$fieldName\">$fieldText</textarea>");
+				EndDIV();
+			} elsif ($fieldType eq "ckeditor") {
+				$fieldText =~ s/\n/\<br\>/g;
+				OpenDIV("class","ContentForm");
+ 				ClosedDIV("class","ContentFormName","$fieldName");
+				ClosedDIV("class","ContentCKField","<textarea class=\"ckeditor\" name=\"$fieldName\">$fieldText</textarea>");
+				EndDIV();
+			} elsif ($fieldType eq "static") {
+				#$fieldText = $query->escapeHTML($fieldText);
+ 				OpenDIV("class","ContentForm");
+ 				ClosedDIV("class","ContentFormName","$fieldName");
+				ClosedDIV("class","ContentFormField","<textarea readonly rows=\"2\" cols=\"110\" name=\"$fieldName\">$fieldText</textarea>");
+				EndDIV();
+			}
+		}
+	}
+
 } else { 
 
 ClosedDIV("class","ContentInfo","<b>Currently editing $thisstory</b>");
@@ -207,6 +301,7 @@ ClosedDIV("class","clearFloat","");
 		open FH, "<:encoding(UTF-8)", $featureFile; #Get existing feature and put all together to grab text between name tags
 		my @records = <FH>;
 		my $allrecords = join "", @records;	
+		my $fieldCheck = $allrecords;
 		close FH;
 	open TH,"<:encoding(UTF-8)",$templatefile or die $!;
 	my @fieldlists = <TH>;
@@ -222,6 +317,12 @@ ClosedDIV("class","clearFloat","");
 
  			$allrecords =~ /\<$fieldName\>(.*)\<\/$fieldName\>/s; 
 			my $fieldText = $1;
+			
+			if ($fieldCheck !~ /<$fieldName>/s) {
+				my $fieldText = "";
+			}
+
+
  			 if ($fieldName eq "Notes") {
  			  	$NotesOnTheSide = "$fieldText";
  				my $showNotes = $fieldText;

@@ -36,8 +36,8 @@ sub getHomeAddress {
 my $ThisIP = "localhost";
 my $systemOn = "Development";
 #For PagserverR:
-my $ThisIP = "163.194.106.177:81";
-my $systemOn = "Development";
+#my $ThisIP = "163.194.106.177:81";
+#my $systemOn = "Development";
 my $ThisIP = "163.193.245.179:81";
 my $systemOn = "Live";
 
@@ -245,8 +245,10 @@ sub convertQuotes {
 	
 		my @allrecords = split('\<\/p\>',$tmpline);
 		foreach my $paraGraph (@allrecords) { #switch every other html " (&quot;) with the `` or ''
-			$paraGraph =~ s/\&ldquo;/\"/g;
-			$paraGraph =~ s/\&rdquo;/\"/g;
+		#	$paraGraph =~ s/\&ldquo;/\"/g;
+		#	$paraGraph =~ s/\&rdquo;/\"/g;
+			$paraGraph =~ s/\&ldquo;/\`\`/g;
+			$paraGraph =~ s/\&rdquo;/\'\'/g;
 			$paraGraph =~ s/\&quot;/\"/g;
 			$paraGraph =~ s/\&#39;/\'/g;			
 			## Search for titles in single quotes and change the opening single quote into a back tick. 
@@ -432,11 +434,12 @@ sub	htmltomerlMarkup {
 	"\&mdash;" => "\-\-",
 	"\–" => "\-\-",	
 	"\<span style=\"(.*)\"\>" => "",
+	"\<span style=``(.*)\'\'\>" => "",
 	"\<strong style=\"(.*)\"\>" => "",
 	"\<p style=``(.*)right(.*)''\>" => "",
 	"\<p style=``(.*)justify(.*)''\>" => "",
 	"\<\/span\>" => "",
-	# other substitutions not relating to text formatting
+# other substitutions not relating to text formatting
 	# replaces trademark symbol with splat.
 	"Celebrity Scoop" => "Celebrity Scoop\*",
 	"Sports Stumpers" => "Sports Stumpers\*",
@@ -457,7 +460,7 @@ sub	htmltomerlMarkup {
 		$tmpline =~ s/\<\/p\>//g;
 	}
 		$tmpline =~ s/#/\<11\>/g;
-
+		$tmpline =~ s/[^[:ascii:]]//g;
 		#utf8::decode($tmpline);
 			#$tmpline =~ s/\x{201d}/\"/g;
 			#$tmpline =~ s/\x{201c}/\"/g;			
@@ -660,53 +663,6 @@ chomp($valText);
 return($valError);
 }
 
-## Loads the Style sheet file for the web pages.
-sub LoadCSS {
-my $CSSfile = $_[0];
-if ($CSSfile eq '') {
-	print "<link href=\"$ThisIP/featman2.css\" rel=\"stylesheet\" media=\"screen\">\n";
-} else {
-	print "<link href=\"$ThisIP/$CSSfile\" rel=\"stylesheet\" media=\"screen\">\n";
-}
-print "<link href=\"$ThisIP/print.css\" rel=\"stylesheet\" media=\"print\">\n";
-}
-
-## Loads the Style sheet file for Feature Editor web page.
-### no longer used. See LoadCSS
-sub LoadEditorCSS {
-print "<link href=\"$ThisIP/feat_editor_style.css\" rel=\"stylesheet\" media=\"screen\">\n";
-print "<link href=\"$ThisIP/print.css\" rel=\"stylesheet\" media=\"print\">\n";
-}
-
-## Loads the Javascript required to have ckeditor fields.
-
-sub LoadJS {
-print "<script src=\"../../ckeditor/ckeditor.js\">\n";
-print "</script>\n";
-print "<script type=\"text/javascript\" src=\"../../jquery/jquery-2.0.3.min.js\">\n";
-print "</script>\n";
-
-#print "<script type=\"text/javascript\">";
-#print " document.getElementsByTagName(\"eventsource\")[0].";
-#print "            addEventListener(\"server-time\", eventHandler, false);";
-#print "   function eventHandler(event)";
-#print "   {";
-#print "       // Alert time sent by the server";
-#print "       document.querySelector('#ticker').innerHTML = event.data;";
-#print "   }";
-#print "</script>";
-
-print "<style>\n";
-print "		.cke_focused,\n";
-print "		.cke_editable.cke_focused\n";
-print "		{\n";
-print "			outline: 3px dotted blue !important;\n";
-print "			*border: 3px dotted blue !important;	/* For IE7 */\n";
-print "		} \n";
-print "	\n";
-print "	</style>\n";
-print "</head>\n";
-}
 
 ### Not currently used ######
 # Not complete
@@ -1140,7 +1096,7 @@ sub makeHeaderTopper {
 
 OpenDIV("class","HeaderTopper");
 ClosedDIV ("class","TopperRight","<a href=\"http://$ThisIP/cgi-bin/FE2/featureDeadlines.cgi?deadlineweek=This Week\">Feature Deadline Manager</a>");
-#ClosedDIV ("class","TopperRight","<a href=\"http://$ThisIP/cgi-bin/FE2/FCM_Backend.cgi\">FCM Backend Manager</a>");
+ClosedDIV ("class","TopperRight","<a href=\"http://$ThisIP/cgi-bin/FE2/FCM_Backend.cgi\">FCM Backend Manager</a>");
 ClosedDIV ("class","TopperRight","<a href=\"http://$ThisIP/cgi-bin/FE2/featuremanager.cgi\">Features Content Manager</a>");
 EndDIV();
 
@@ -2228,6 +2184,15 @@ sub getFileList {
 return($filenameList);				    
 }
 
+sub convertMMDDYYYYtoMDD {
+	my @xmlFiles = @_;
+	my $filenameList = "";
+	foreach (@xmlFiles) {
+		$filenameList = ("$filenameList<option value=\"$_\">$_</option>\n");
+	}
+return($filenameList);
+}
+
 sub ArrayADir {
 	my @filenameListArray;
 	my $tempfolder = $_[0];
@@ -2737,5 +2702,6 @@ my $monthAsWord = "$shortmonthsOfYear[$mm]";
 my $nowtime = "$monthAsWord$day$hour$realMinute";
 return($nowtime);
 }
+
 
 1;

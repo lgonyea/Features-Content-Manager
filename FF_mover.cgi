@@ -454,18 +454,18 @@ if (($thistmp =~ /cross.tmp$/) || ($thistmp =~ /puzz.tmp$/)) {
 			uploadFeatureTEST($filterfeat);
 			$completeAction = "Feature has been Filtered to Becky. <br>This feature is in Testing mode.\n Filtered to becky's TEST area for review.\n";
 		}
-		emailnotifier($oldstate,"posted",$filterfeat,$featName,$specFile);
+		#emailnotifier($oldstate,"posted",$filterfeat,$featName,$specFile);
 		if ($oldstate eq 'Filtered') {
-		emailnotifier($oldstate,"Refiltered",$filterfeat,$featName,$specFile);		
+		#emailnotifier($oldstate,"Refiltered",$filterfeat,$featName,$specFile);		
 		}
 		ClosedDIV("class","ContentInfo","Action Completed!<br>$completeAction");
 		ClosedDIV("class","ContentEditFull",$featPreview);
 		ClosedDIV("class","ContentInfo","End of $filename");
 } 
 if ($oldstate ne $newstatParam) {
-	emailnotifier($oldstate,$newstatParam,$newfeat,$featName,$specFile);
+#DEV	emailnotifier($oldstate,$newstatParam,$newfeat,$featName,$specFile);
 	if ($newstatParam eq "Copy Edit") {
-		CopyEditnotifier($oldstate,$newstatParam,$newfeat,$featName,$specFile);
+	#	CopyEditnotifier($oldstate,$newstatParam,$newfeat,$featName,$specFile);
 	}
 }
 EndDIV();
