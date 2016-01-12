@@ -21,7 +21,7 @@ my $pathUNIX;
 my $baseFEfolder = "/Library/WebServer/CGI-Executables/FE2";
 my $FeatFolder = "/Library/WebServer/FF2";
 my ($ThisIP,$systemType) = getHomeAddress();
-require("FF_web_elements.cgi");
+require("/Library/WebServer/CGI-Executables/FE2/FF_web_elements.cgi");
 
 sub getFilesLocal {
 my $CGIscriptslocal = "/Library/WebServer/CGI-Executables/FE2";
@@ -245,10 +245,15 @@ sub convertQuotes {
 	
 		my @allrecords = split('\<\/p\>',$tmpline);
 		foreach my $paraGraph (@allrecords) { #switch every other html " (&quot;) with the `` or ''
-		#	$paraGraph =~ s/\&ldquo;/\"/g;
-		#	$paraGraph =~ s/\&rdquo;/\"/g;
-			$paraGraph =~ s/\&ldquo;/\`\`/g;
-			$paraGraph =~ s/\&rdquo;/\'\'/g;
+		# fix change 12/3/15
+		# new
+			$paraGraph =~ s/\&lsquo;\&lsquo;/\"/g;
+			$paraGraph =~ s/\&rsquo;\&rsquo;/\"/g;
+			$paraGraph =~ s/\&ldquo;/\"/g;
+			$paraGraph =~ s/\&rdquo;/\"/g;
+		# old
+		#	$paraGraph =~ s/\&ldquo;/\`\`/g;
+		#	$paraGraph =~ s/\&rdquo;/\'\'/g;
 			$paraGraph =~ s/\&quot;/\"/g;
 			$paraGraph =~ s/\&#39;/\'/g;			
 			## Search for titles in single quotes and change the opening single quote into a back tick. 
@@ -420,7 +425,7 @@ sub	htmltomerlMarkup {
 	"ý" => "\"'y",	
 	"\&yuml;" => "\":y",
 	"ÿ" => "\":y",	
-	"\&ndash;" => "\-\-",
+	"\&ndash;" => "--",
 	"\<em\>" => "\<7\>",
 	"\</em\>" => "\<8\>",
 	"&bull;" => "\<10\>",
@@ -431,8 +436,8 @@ sub	htmltomerlMarkup {
 	"\ʼ" => "\'",
 	"\&hellip;" => "\.\.\.",
 	"\…" => "\.\.\.",
-	"\&mdash;" => "\-\-",
-	"\–" => "\-\-",	
+	"\&mdash;" => "--",
+	"\–" => "--",	
 	"\<span style=\"(.*)\"\>" => "",
 	"\<span style=``(.*)\'\'\>" => "",
 	"\<strong style=\"(.*)\"\>" => "",
@@ -1623,6 +1628,27 @@ sub makeadir {
 	}
 	chmod(0777,$directory1);
 		my $directory2 = "$FeatFolder/$fold1/$fold2";
+	unless(-e $directory2 or mkdir $directory2) {
+		die "Unable to create $directory\n";
+	}
+	chmod(0777,$directory2);
+
+}
+
+## Creates 2 directories much like the makeadir routine. But the parameteres are a bit generic.
+# parameter 1 is a full directory. Must contain the ending / mark. 
+# parameter 2 is a secondary directory to be made.
+sub makeanotherdir {
+	my $fold1 = $_[0];
+	my $fold2 = $_[1];
+	my $directory1 = "$fold1";
+	#print "attempting to create directory $directory\n";
+
+	unless(-e $directory1 or mkdir $directory1) {
+		die "Unable to create $directory\n";
+	}
+	chmod(0777,$directory1);
+		my $directory2 = "${fold1}$fold2";
 	unless(-e $directory2 or mkdir $directory2) {
 		die "Unable to create $directory\n";
 	}

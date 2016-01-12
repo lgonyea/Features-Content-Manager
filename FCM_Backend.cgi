@@ -75,6 +75,37 @@ EndDIV();
 
 ClosedDIV("class","SidebarTitle","Recycle a Feature");
 OpenDIV("class","SidebarGroup","","");
+my $xmlDatelist = "";
+my @XMLtempFiles = ArrayADir("${FeatFolder}/xmlData","no");
+	foreach (@XMLtempFiles) {
+		my $getToDate = substr $_,8,8;
+		my $xmlMonth = substr $getToDate,0,2;
+		my $fixMonth = $xmlMonth;
+		my $xmlDay = substr $getToDate,2,2;
+		my $xmlYear = substr $getToDate,4,4;
+		if ($xmlMonth =~ /^0/) {
+			$fixMonth = substr $xmlMonth,1,1;
+		} elsif ($xmlMonth =~ /^11/)  {
+			$fixMonth = "n";
+		} elsif ($xmlMonth =~ /^12/)  {
+			$fixMonth = "d";
+		} else {
+			$fixMonth = "o";
+					#$fixMonth = substr $xmlMonth,1,1;
+		} 
+		my $dateListing = "$fixMonth${xmlDay} ($xmlYear)";
+		$xmlDatelist = ("$xmlDatelist<option value=\"$_\">$dateListing</option>\n");
+
+	}
+
+#my $xmlDatelist = convertMMDDYYYYtoMDD(@XMLtempFiles);
+my $XMLtempFiles = getFileList("$xmlTempLocal","No");
+
+ClosedDIV("class","SidebarChoice","<form method=\"get\" action=\"http://$homeIP/cgi-bin/FE2/FCM_Backend.cgi\"><select name=\"xmlFeat\">\n$XMLtempFiles</select>\n<select name=\"fileToDo\">\n$xmlDatelist</select>\n<input type=\"hidden\" name=\"status\" value=\"recycle\"><input type=\"hidden\" name=\"pageType\" value=\"recycle\"><input type=\"hidden\" name=\"Mode\" value=\"recycle\"><input type=\"submit\" value=\"View this feature\"></form>\n");
+EndDIV();
+
+ClosedDIV("class","SidebarTitle","Recycle a Feature");
+OpenDIV("class","SidebarGroup","","");
 ClosedDIV("class","SidebarChoice","<form method=\"get\" action=\"http://$homeIP/cgi-bin/FE2/FCM_Backend.cgi\"><input type=\"hidden\" name=\"pageType\" value=\"ArchiveSearch\"><input type=\"submit\" value=\"Search Feature Archives\"></form>\n");
 EndDIV();
 
@@ -106,38 +137,6 @@ ClosedDIV("class","SidebarChoice","<form method=\"post\" action=\"http://$homeIP
 EndDIV();
 =cut User manager not ready for live
 
-ClosedDIV("class","SidebarTitle","Recycle a Feature");
-OpenDIV("class","SidebarGroup","","");
-my $xmlDatelist = "";
-my @XMLtempFiles = ArrayADir("${FeatFolder}/xmlData","no");
-	foreach (@XMLtempFiles) {
-		my $getToDate = substr $_,8,8;
-		my $xmlMonth = substr $getToDate,0,2;
-		my $fixMonth = $xmlMonth;
-		my $xmlDay = substr $getToDate,2,2;
-		my $xmlYear = substr $getToDate,4,4;
-		if ($xmlMonth =~ /^0/) {
-			$fixMonth = substr $xmlMonth,1,1;
-		} elsif ($xmlMonth =~ /^11/)  {
-			$fixMonth = "n";
-		} elsif ($xmlMonth =~ /^12/)  {
-			$fixMonth = "d";
-		} else {
-			$fixMonth = "o";
-					#$fixMonth = substr $xmlMonth,1,1;
-		} 
-		my $dateListing = "$fixMonth${xmlDay} ($xmlYear)";
-		$xmlDatelist = ("$xmlDatelist<option value=\"$_\">$dateListing</option>\n");
-
-	}
-
-#my $xmlDatelist = convertMMDDYYYYtoMDD(@XMLtempFiles);
-my $XMLtempFiles = getFileList("$xmlTempLocal","No");
-
-ClosedDIV("class","SidebarChoice","<form method=\"get\" action=\"http://$homeIP/cgi-bin/FE2/FCM_Backend.cgi\"><select name=\"xmlFeat\">\n$XMLtempFiles</select>\n<select name=\"fileToDo\">\n$xmlDatelist</select>\n<input type=\"hidden\" name=\"status\" value=\"recycle\"><input type=\"hidden\" name=\"pageType\" value=\"recycle\"><input type=\"hidden\" name=\"Mode\" value=\"recycle\"><input type=\"submit\" value=\"View this feature\"></form>\n");
-#ClosedDIV("class","SidebarChoice","<form method=\"post\" action=\"http://$homeIP/cgi-bin/FE2/FCM_Backend.cgi\"><select name=\"DateToDo\">\n$xmlDatelist</select>\n");
-#ClosedDIV("class","SidebarChoice","<form method=\"post\" action=\"http://$homeIP/cgi-bin/FE2/FCM_Backend.cgi\"><input type=\"hidden\" name=\"pageType\" value=\"SpecEditor\"><input type=\"submit\" value=\"Show All Sepc Files\"></form>\n");
-EndDIV();
 
 #ClosedDIV("class","SidebarTitle","Recover Deleted Feature");
 #OpenDIV("class","SidebarGroup","","");
